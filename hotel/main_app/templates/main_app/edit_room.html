@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        img{
+            width: 500px;
+            height: 400px;
+        }
+        label{
+            display: block;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<a href="{% url 'logout_page' %}">Logout</a>
+<a href="{% url 'rooms_page' %}">Rooms</a>
+<a href="{% url 'booking_page' %}">Booking</a>
+<form action="/edit_room" method="post" enctype="multipart/form-data">
+    <input name="room_id" value="{{ room.id }}" hidden="hidden">
+{% csrf_token %}
+    {{ form }}
+<br><br>
+<button>Изменить комнату</button>
+</form>
+</body>
+</html>

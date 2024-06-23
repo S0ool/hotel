@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        img{
+            width: 500px;
+            height: 400px;
+        }
+        label{
+            display: block;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<a href="{% url 'logout_page' %}">Logout</a>
+<a href="{% url 'rooms_page' %}">Rooms</a>
+<a href="{% url 'booking_page' %}">Booking</a>
+<form action="/edit_booking" method="post" enctype="multipart/form-data">
+    <input name="booking_id" value="{{ booking.id }}" hidden="hidden">
+    checkin: <input name="checkin" type="date"><br>
+    checkout: <input name="checkout" type="date"><br>
+    Room number: <select name="room_id">
+        {% for room in rooms %}
+            <option value="{{ room.id }}" {% if room == booking.room %}
+                    selected
+                    {% endif %}
+            >{{ room }}</option>
+        {% endfor %}
+    </select><br>
+
+{% csrf_token %}
+<br><br>
+<button>Изменить бронь</button>
+</form>
+</body>
+</html>

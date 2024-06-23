@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <STYLE>
+        img{
+            width: 300px;
+            height: 200px;
+        }
+        label{
+            display: block;
+            margin-top: 20px;
+        }
+    </STYLE>
+</head>
+<body>
+<a href="{% url 'logout_page' %}">Logout</a>
+<a href="{% url 'booking_page' %}">Booking</a>
+<form action="add_room" method="post" enctype="multipart/form-data">
+{% csrf_token %}
+    {{ form }}
+<br><br>
+<button>Создать комнату</button>
+</form>
+
+
+{% for room in rooms %}
+    <a href="{% url 'add_booking_page' room_id=room.id %}">Номер комнаты: {{ room.room_number }}</a>
+    <div>Тип комнаты: {{ room.room_type }}</div>
+    <div>Цена: {{ room.room_price }}</div>
+    <div>Описание: {{ room.description }}</div>
+    <img src="{{ room.image.url }}">
+    <br>
+    <form action="delete_room" method="post">
+    {% csrf_token %}
+        <input name="room_id" value="{{ room.id }}" hidden="hidden">
+        <button>Удалить</button>
+    </form>
+    <br>
+
+    <form action="{% url 'edit_room_page' room_id=room.id %}">
+        <button>Изменить</button>
+    </form>
+{% endfor %}
+</body>
+</html>

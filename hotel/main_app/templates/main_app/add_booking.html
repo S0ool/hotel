@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/add_booking" method="post">
+    {% csrf_token %}
+    checkin: <input name="checkin" type="date">
+    checkout: <input name="checkout" type="date">
+    <input name="room_id" value="{{ room_id }}" type="hidden">
+<br><br>
+<button>Создать бронь</button>
+</form>
+</body>
+</html>
